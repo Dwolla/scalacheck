@@ -415,4 +415,10 @@ private[scalacheck] sealed trait ArbitraryLowPriority {
    *  future test runs.
    */
   implicit lazy val arbScalaRandom: Arbitrary[scala.util.Random] = Arbitrary(Gen.scalaRandom)
+
+  /** Arbitrary instance of `java.util.Random` seeded with an arbitrary `Long` value. The behavior of the
+   *  `java.util.Random` will be tied to the ScalaCheck seed and therefore be repeatable when the same seed is used for
+   *  future test runs.
+   */
+  implicit lazy val arbJavaRandom: Arbitrary[java.util.Random] = Arbitrary(Gen.javaRandom)
 }

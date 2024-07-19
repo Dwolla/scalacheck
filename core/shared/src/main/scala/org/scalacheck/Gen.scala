@@ -1537,4 +1537,10 @@ object Gen extends GenArities with GenVersionSpecific {
    */
   val scalaRandom: Gen[scala.util.Random] =
     Gen.long.map(new scala.util.Random(_))
+
+  /** Generator of `java.util.Random` seeded with an arbitrary `Long` value. The behavior of the `java.util.Random` will
+   *  be tied to the ScalaCheck seed and therefore be repeatable when the same seed is used for future test runs.
+   */
+  val javaRandom: Gen[java.util.Random] =
+    Gen.long.map(new java.util.Random(_))
 }
