@@ -1531,4 +1531,10 @@ object Gen extends GenArities with GenVersionSpecific {
   // used to calculate how many per-item retries we should allow.
   private def collectionRetries(n: Int): Int =
     Integer.max(10, n / 10)
+
+  /** Generator of `scala.util.Random` seeded with an arbitrary `Long` value. The behavior of the `scala.util.Random`
+   *  will be tied to the ScalaCheck seed and therefore be repeatable when the same seed is used for future test runs.
+   */
+  val scalaRandom: Gen[scala.util.Random] =
+    Gen.long.map(new scala.util.Random(_))
 }

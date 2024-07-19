@@ -409,4 +409,10 @@ private[scalacheck] sealed trait ArbitraryLowPriority {
 
   implicit def arbPartialFunction[A: Cogen, B: Arbitrary]: Arbitrary[PartialFunction[A, B]] =
     Arbitrary(implicitly[Arbitrary[A => Option[B]]].arbitrary.map(Function.unlift))
+
+  /** Arbitrary instance of `scala.util.Random` seeded with an arbitrary `Long` value. The behavior of the
+   *  `scala.util.Random` will be tied to the ScalaCheck seed and therefore be repeatable when the same seed is used for
+   *  future test runs.
+   */
+  implicit lazy val arbScalaRandom: Arbitrary[scala.util.Random] = Arbitrary(Gen.scalaRandom)
 }
